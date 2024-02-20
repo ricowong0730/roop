@@ -1,6 +1,7 @@
 from typing import Any, List, Callable
 import cv2
 import threading
+import time
 from gfpgan.utils import GFPGANer
 
 import roop.globals
@@ -107,3 +108,4 @@ def process_video(source_path: str, temp_frame_paths: List[str]) -> None:
     frame_path_chunks = list(chunks(temp_frame_paths, 1000))
     for frame_path_chunk in frame_path_chunks:
         roop.processors.frame.core.process_video(None, frame_path_chunk, process_frames)
+        time.sleep(5)
