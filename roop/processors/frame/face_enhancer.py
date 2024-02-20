@@ -15,6 +15,9 @@ THREAD_SEMAPHORE = threading.Semaphore()
 THREAD_LOCK = threading.Lock()
 NAME = 'ROOP.FACE-ENHANCER'
 
+def chunks(lst, n):
+    for i in range(0, len(lst), n):
+        yield lst[i:i + n]
 
 def get_face_enhancer() -> Any:
     global FACE_ENHANCER
@@ -101,4 +104,6 @@ def process_image(source_path: str, target_path: str, output_path: str) -> None:
 
 
 def process_video(source_path: str, temp_frame_paths: List[str]) -> None:
-    roop.processors.frame.core.process_video(None, temp_frame_paths, process_frames)
+    frame_path_chunks = list(chunks(temp_frame_paths, 1000))
+    for frame_path_chunk in frame_path_chunks:
+        roop.processors.frame.core.process_video(None, frame_path_chunk, process_frames)
