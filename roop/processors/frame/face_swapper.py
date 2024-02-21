@@ -104,7 +104,7 @@ def process_video(source_path: str, temp_frame_paths: List[str]) -> None:
             number = os.path.splitext(os.path.basename(temp_frame_path))[0]
             if int(number) < int(roop.globals.reference_frame_number):
                 continue
-            print(f'Finding face reference on {temp_frame_path} [{index}]')
+            print(f'Finding face reference on {temp_frame_path}')
             reference_frame = cv2.imread(temp_frame_path)
             reference_face = get_one_face(reference_frame, 0)
         set_face_reference(reference_face)
