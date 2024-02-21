@@ -96,9 +96,11 @@ def process_video(source_path: str, temp_frame_paths: List[str]) -> None:
     if not roop.globals.many_faces and not get_face_reference():
         reference_frame = cv2.imread(temp_frame_paths[roop.globals.reference_frame_number])
         reference_face = get_one_face(reference_frame, roop.globals.reference_face_position)
+        print(f'bbox: {reference_face.bbox}, det_score: {reference_face.det_score}')
         for temp_frame_path in temp_frame_paths:
             if reference_face is not None:
                 break;
+            print(f'Finding face reference on {temp_frame_path}')
             reference_frame = cv2.imread(temp_frame_path)
             reference_face = get_one_face(reference_frame, 0)
         set_face_reference(reference_face)
