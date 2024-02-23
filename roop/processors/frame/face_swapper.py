@@ -102,7 +102,7 @@ def process_video(source_path: str, temp_frame_paths: List[str]) -> None:
                 print(f'bbox: {reference_face.bbox}, det_score: {reference_face.det_score}')
                 break
             number = os.path.splitext(os.path.basename(temp_frame_path))[0]
-            if int(number) < int(roop.globals.reference_frame_number):
+            if int(number) < int(roop.globals.reference_frame_number) + 1:
                 continue
             print(f'Finding face reference on {temp_frame_path}')
             reference_frame = cv2.imread(temp_frame_path)
