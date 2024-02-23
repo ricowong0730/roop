@@ -70,7 +70,7 @@ def restore_audio(target_path: str, output_path: str) -> None:
 
 def get_temp_frame_paths(target_path: str) -> List[str]:
     temp_directory_path = get_temp_directory_path(target_path)
-    return glob.glob((os.path.join(glob.escape(temp_directory_path), '*.' + roop.globals.temp_frame_format)))
+    return sorted(glob.glob((os.path.join(glob.escape(temp_directory_path), '*.' + roop.globals.temp_frame_format))))
 
 
 def get_temp_directory_path(target_path: str) -> str:
