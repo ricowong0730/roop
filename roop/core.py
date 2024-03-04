@@ -152,15 +152,16 @@ def start() -> None:
     if predict_video(roop.globals.target_path):
         destroy()
     update_status('Creating temporary resources...')
-    create_temp(roop.globals.target_path)
+    newly_created = create_temp(roop.globals.target_path)
     # extract frames
-    if roop.globals.keep_fps:
-        fps = detect_fps(roop.globals.target_path)
-        update_status(f'Extracting frames with {fps} FPS...')
-        extract_frames(roop.globals.target_path, fps)
-    else:
-        update_status('Extracting frames with 30 FPS...')
-        extract_frames(roop.globals.target_path)
+    if newly_created:
+        if roop.globals.keep_fps:
+            fps = detect_fps(roop.globals.target_path)
+            update_status(f'Extracting frames with {fps} FPS...')
+            extract_frames(roop.globals.target_path, fps)
+        else:
+            update_status('Extracting frames with 30 FPS...')
+            extract_frames(roop.globals.target_path)
     # process frame
     temp_frame_paths = get_temp_frame_paths(roop.globals.target_path)
     if temp_frame_paths:
