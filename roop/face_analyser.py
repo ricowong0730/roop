@@ -46,6 +46,8 @@ def get_many_faces(frame: Frame) -> Optional[List[Face]]:
 def find_similar_face(frame: Frame, reference_face: Face) -> Optional[Face]:
     many_faces = get_many_faces(frame)
     if many_faces:
+        if len(many_faces) == 1:
+            return many_faces[0]
         for face in many_faces:
             if hasattr(face, 'normed_embedding') and hasattr(reference_face, 'normed_embedding'):
                 distance = numpy.sum(numpy.square(face.normed_embedding - reference_face.normed_embedding))
